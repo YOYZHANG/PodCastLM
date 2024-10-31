@@ -2,17 +2,9 @@ from fish_audio_sdk import Session, TTSRequest, ReferenceAudio
 from pydub import AudioSegment
 import io
 
-from constants import FISHAUDIO_KEY,FISHAUDIO_SPEEKER
+from constants import FISHAUDIO_KEY
 
 
-
-import random
-
-def get_adapter_speeker_id(speaker_name):
-    speeker = FISHAUDIO_SPEEKER[0]
-    if speaker_name != "主持人": 
-        speeker = random.choice(FISHAUDIO_SPEEKER)
-    return speeker["id"]
 
 def fishaudio_tts(text, reference_id=None) -> AudioSegment:
     """

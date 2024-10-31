@@ -20,14 +20,14 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
   const [tone, setTone] = useState('neutral');
   const [duration, setDuration] = useState('short');
   const [language, setLanguage] = useState('Chinese');
-  const [hostVoice, setHostVoice] = useState('zh-CN-YunxiNeural');
-  const [guestVoice, setGuestVoice] = useState('zh-CN-YunzeNeural');
-  const [provider, setProvider] = useState('azure');
   const [fileError, setFileError] = useState<string | null>(null);
   const [url, setUrl] = useState('');
-  const [mode,setMode] = useState<'pdf'|'url'>('pdf');
+  const [mode, setMode] = useState<'pdf' | 'url'>('pdf');
 
-  const speekerReq = useSpeeker()
+  const { 
+    hostVoice, setHostVoice,
+    guestVoice, setGuestVoice,
+    provider, setProvider, data: speekers } = useSpeeker()
 
 
 
@@ -58,23 +58,23 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
   };
 
 
-  const handleSubmit = () => { 
-    if (mode=='pdf' && !pdfFile) {
+  const handleSubmit = () => {
+    if (mode == 'pdf' && !pdfFile) {
       setFileError('Please upload a PDF file.');
       toast({
         title: "填写错误",
-        variant: "destructive" ,
+        variant: "destructive",
         description: "Please upload a PDF file.",
       })
       return;
     }
     setFileError('');
-    if (mode=='url' ) {
+    if (mode == 'url') {
       const urlInValid = !url || !url.startsWith("http");
-      if(urlInValid){
+      if (urlInValid) {
         toast({
           title: "填写错误",
-          variant: "destructive" ,
+          variant: "destructive",
           description: "请检查url是否正确",
         })
         return;
@@ -82,15 +82,15 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
     }
 
     const formData = new FormData();
-    mode=='pdf' && pdfFile && formData.append('pdfFile', pdfFile);
+    mode == 'pdf' && pdfFile && formData.append('pdfFile', pdfFile);
     formData.append('textInput', textInput);
     formData.append('tone', tone);
     formData.append('duration', duration);
     formData.append('language', language);
-    formData.append('hostVoice', hostVoice);
-    formData.append('guestVoice', guestVoice);
-    formData.append('provider', provider);
-    mode=='url' && url &&formData.append('url', url);
+    hostVoice && formData.append('hostVoice', hostVoice);
+    guestVoice && formData.append('guestVoice', guestVoice);
+    provider && formData.append('provider', provider);
+    mode == 'url' && url && formData.append('url', url);
     formData.append('mode', mode);
 
     handleGenerate(formData);
@@ -100,74 +100,74 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
     <div className={`w-full md:w-1/5 p-0 md:p-2 xl:p-6 border-r rounded-2xl m-3 h-full border-gray-200 bg-white flex flex-col text-gray-800 flex shadow-lg shadow-gray-300/50 ${className ?? ''}`}>
       <div className="flex-grow flex-1 h-1 overflow-y-auto space-y-8">
         <div className='transition-all duration-300' >
-        <Tabs value={mode} onValueChange={e=>setMode(e as 'pdf')} className="w-full h-full flex flex-col">
-          <div className="">
-            <TabsList className="inline-flex bg-gray-200 rounded-xl p-1">
-              <TabsTrigger 
-                value="pdf" 
-                className="data-[state=active]:bg-white rounded-[5px] m-1"
-              >
-                PDF访谈
-              </TabsTrigger>
-              <TabsTrigger 
-                value="url" 
-                className="data-[state=active]:bg-white rounded-[5px] m-1"
-              >
-                网页访谈
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="pdf">
-            <h2 className="text-sm font-semibold mb-3 flex items-center"><Upload className="mr-2 text-gray-600" size={20} /> 上传 PDF *</h2>
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-gray-400 bg-white hover:bg-gray-50 transition-all duration-300">
-              <input
-                type="file"
-                accept=".pdf"
-                className="hidden"
-                id="pdf-upload"
-                onChange={handleFileChange}
-              />
-              <label htmlFor="pdf-upload" className="cursor-pointer">
-                <FileText className="mx-auto h-12 w-12 text-gray-400" />
-                <p className="mt-2 text-sm font-semibold text-gray-600">
-                  {pdfFile ? pdfFile.name : "Click to upload PDF"}
-                </p>
-                <p className="mt-1 text-xs text-gray-500">
-                  PDF 文件不应超过 1 MB
-                </p>
-              </label>
+          <Tabs value={mode} onValueChange={e => setMode(e as 'pdf')} className="w-full h-full flex flex-col">
+            <div className="">
+              <TabsList className="inline-flex bg-gray-200 rounded-xl p-1">
+                <TabsTrigger
+                  value="pdf"
+                  className="data-[state=active]:bg-white rounded-[5px] m-1"
+                >
+                  PDF访谈
+                </TabsTrigger>
+                <TabsTrigger
+                  value="url"
+                  className="data-[state=active]:bg-white rounded-[5px] m-1"
+                >
+                  网页访谈
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="pdf">
+                <h2 className="text-sm font-semibold mb-3 flex items-center"><Upload className="mr-2 text-gray-600" size={20} /> 上传 PDF *</h2>
+                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-gray-400 bg-white hover:bg-gray-50 transition-all duration-300">
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    className="hidden"
+                    id="pdf-upload"
+                    onChange={handleFileChange}
+                  />
+                  <label htmlFor="pdf-upload" className="cursor-pointer">
+                    <FileText className="mx-auto h-12 w-12 text-gray-400" />
+                    <p className="mt-2 text-sm font-semibold text-gray-600">
+                      {pdfFile ? pdfFile.name : "Click to upload PDF"}
+                    </p>
+                    <p className="mt-1 text-xs text-gray-500">
+                      PDF 文件不应超过 1 MB
+                    </p>
+                  </label>
+                </div>
+                {fileError && <p className="text-red-500">{fileError}</p>}
+                <div className="flex items-center space-x-2 pt-2">
+                  <span className="text-sm font-semibold text-gray-500">试一试: </span>
+                  <button
+                    onClick={handleDemoPdfClick}
+                    className="text-sm  font-semibold underline"
+                  >
+                    introduce_chatgpt.pdf
+                  </button>
+                </div>
+              </TabsContent>
+              <TabsContent value="url" >
+                <h2 className="text-sm font-semibold mb-3 flex items-center"><Link className="mr-2 text-gray-600" size={20} /> URL 抓取 *</h2>
+                <Input
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="请输入 URL"
+                />
+                {fileError && <p className="text-red-500">{fileError}</p>}
+                <div className="flex items-center space-x-2 pt-2">
+                  <span className="text-sm font-semibold text-gray-500">Demo: </span>
+                  <button
+                    onClick={() => setUrl('https://mp.weixin.qq.com/s/698Q4to-onrAbzJu9QApcg')}
+                    className="text-sm  font-semibold underline text-blue-500 text-left"
+                  >
+                    PodCastLM：PDF 生成中文播客
+                  </button>
+                </div>
+              </TabsContent>
             </div>
-            {fileError && <p className="text-red-500">{fileError}</p>}
-            <div className="flex items-center space-x-2 pt-2">
-              <span className="text-sm font-semibold text-gray-500">试一试: </span>
-              <button
-                onClick={handleDemoPdfClick}
-                className="text-sm  font-semibold underline"
-              >
-                introduce_chatgpt.pdf
-              </button>
-            </div>
-            </TabsContent>
-            <TabsContent value="url" >
-            <h2 className="text-sm font-semibold mb-3 flex items-center"><Link className="mr-2 text-gray-600" size={20} /> URL 抓取 *</h2>
-            <Input
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="请输入 URL"
-            />
-            {fileError && <p className="text-red-500">{fileError}</p>}
-            <div className="flex items-center space-x-2 pt-2">
-              <span className="text-sm font-semibold text-gray-500">Demo: </span>
-              <button
-                onClick={() => setUrl('https://mp.weixin.qq.com/s/698Q4to-onrAbzJu9QApcg')}
-                className="text-sm  font-semibold underline text-blue-500 text-left"
-              >
-                PodCastLM：PDF 生成中文播客
-              </button>
-            </div>
-            </TabsContent>
-          </div>
           </Tabs>
-          
+
         </div>
 
         <div>
@@ -221,14 +221,14 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
           </Select>
         </div>
 
-        {speekerReq.data && <div>
+        {speekers && <div>
           <h2 className="text-sm font-semibold mb-3 flex items-center"><Globe className="mr-2 text-gray-600" size={20} /> 声音</h2>
           <Card >
             <CardContent className='p-3'>
               <h2 className="text-sm font-semibold mb-3 flex items-center">Provider</h2>
               <Select value={provider} onValueChange={newProvider => {
                 setProvider(newProvider)
-                const voices = speekerReq.data?.[newProvider];
+                const voices = speekers?.[newProvider];
                 if (voices) {
                   setHostVoice(voices[0].id)
                   setGuestVoice(voices[1].id)
@@ -239,7 +239,7 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
                 </SelectTrigger>
                 <SelectContent className="bg-white border-gray-200 rounded-xl mt-3">
                   {
-                    Object.keys(speekerReq.data ?? {}).map(item => <SelectItem
+                    Object.keys(speekers ?? {}).map(item => <SelectItem
                       key={item}
                       value={item}
                       className="cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-100">{item}</SelectItem>)
@@ -253,7 +253,7 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
                 </SelectTrigger>
                 <SelectContent className="bg-white border-gray-200 rounded-xl">
                   {
-                    speekerReq.data?.[provider].map(item => <SelectItem
+                    provider && speekers?.[provider].map(item => <SelectItem
                       key={item.id}
                       value={item.id}
                       className="cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-100">{item.name}</SelectItem>)
@@ -268,7 +268,7 @@ export default function Menu({ handleGenerate, className, isGenerating }: { clas
                 <SelectContent className="bg-white border-gray-200 rounded-xl">
                   {
 
-                    speekerReq.data?.[provider].map(item => <SelectItem
+                    provider && speekers?.[provider].map(item => <SelectItem
                       key={item.id}
                       value={item.id}
                       className="cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-100">{item.name}</SelectItem>)

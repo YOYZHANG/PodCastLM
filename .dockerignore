@@ -1,0 +1,8 @@
+backend/__pycache__
+backend/tmp
+frontend/node_modules
+
+**/*.log
+
+*.spec.js
+*.test.js
