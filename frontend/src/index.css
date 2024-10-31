@@ -13,12 +13,19 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --radius: 10px;
+  --input: 220deg 13.04% 90.98%;
+  --destructive: 0 72.22% 50.59%;
+  --destructive-foreground: 0 0% 98%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --input: 220deg 13.04% 90.98%;
+    --destructive: 0 72.22% 50.59%;
+    --destructive-foreground: 0 0% 98%;
   }
 }
 

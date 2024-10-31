@@ -25,6 +25,7 @@ SPEECH_KEY = os.getenv('SPEECH_KEY')
 SPEECH_REGION = "japaneast"
 
 FISHAUDIO_KEY = os.getenv('FISHAUDIO_KEY')
+JINA_KEY = os.getenv('JINA_KEY','jina_c1759c7f49e14ced990ac7776800dc44ShJNTXBCizzwjE7IMFYJ6LD960cG')
 
 # Fireworks API-related constants
 FIREWORKS_API_KEY = os.getenv('FIREWORKS_API_KEY')

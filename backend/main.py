@@ -16,7 +16,7 @@ app.mount("/audio", StaticFiles(directory=AUDIO_CACHE_DIR), name="audio")
 # 添加CORS中间件
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ai.podcastlm.fun/"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

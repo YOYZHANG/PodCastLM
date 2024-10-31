@@ -12,6 +12,11 @@ Try it Online ⚡️:  [PodCastLM](https://endearing-rabanadas-2ee528.netlify.ap
 ## OverView
 This project is inspired by the NotebookLM tool, This tool processes the content of a PDF, generates a natural dialogue suitable for an audio podcast, and outputs it as an MP3 file.
 
+## 🏆 Sponsors
+
+- [@JiongXin](https://github.com/tonyljx)
+- [@Terry Zhang](https://github.com/tzhangchi)
+
 ## 💻 TechStack
 - [React](https://react.dev/) - FrontEnd Development
 - [Tailwindcss](https://tailwindcss.com/) - CSS Engine
@@ -43,7 +48,7 @@ Please ⭐️ this repository if this project helped you!
 
 Your appreciation is my greatest strength in updating content！
 
-<a href="https://www.buymeacoffee.com/zhangxiaoqian" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+<a href="https://ko-fi.com/zhangxiaoqian" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
 
 ---
 

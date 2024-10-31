@@ -11,6 +11,12 @@
 该项目的灵感来自于 Google NotebookLM 工具。通过处理 PDF 的内容，生成适合音频播客的自然对话，并将其输出为 MP3 文件。
 
 
+## 🏆 赞助者
+
+- [@JiongXin](https://github.com/tonyljx)
+- [@Terry Zhang](https://github.com/tzhangchi)
+
+
 ## 💻 技术栈
 - [React](https://react.dev/) - FrontEnd Development
 - [Tailwindcss](https://tailwindcss.com/) - CSS Engine

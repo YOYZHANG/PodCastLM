@@ -5,6 +5,7 @@ import { useJsonData } from "./hooks/useJsonData";
 import { useStreamText } from './hooks/useStreamText';
 import { BASE_URL } from "./lib/constant";
 import MobileMenu from "./components/mobile-menu";
+import { Toaster } from "@/components/ui/toaster"
 
 function App() {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -37,6 +38,7 @@ function App() {
   }
   return (
     <div className="h-screen flex flex-col overflow-hidden">
+       <Toaster />
       <main className="flex-grow flex bg-[rgb(245,245,245)] h-full">
         <Menu className="hidden md:flex "
           handleGenerate={handleGenerate}
