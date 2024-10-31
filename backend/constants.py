@@ -52,7 +52,15 @@ SUNO_LANGUAGE_MAPPING = {
 }
 
 
-FISHAUDIO_SPEEKER = [
+SPEEKERS = { }
+if SPEECH_KEY:
+    SPEEKERS['azure'] = [
+        {"id":"zh-CN-YunxiNeural","name":"云希"},
+        {"id":"zh-CN-YunzeNeural","name":"云哲"},
+        {"id":"zh-CN-YunxuanNeural","name":"晓萱"},
+    ]
+if FISHAUDIO_KEY:
+    SPEEKERS['fishaudio'] = [
     { "id": "59cb5986671546eaa6ca8ae6f29f6d22", "name": "央视配音" },
     { "id": "738d0cc1a3e9430a9de2b544a466a7fc", "name": "雷军" },
     { "id": "54a5170264694bfc8e9ad98df7bd89c3", "name": "丁真" },
@@ -74,11 +82,3 @@ FISHAUDIO_SPEEKER = [
     { "id": "188c9b7c06654042be0e8a25781761e8", "name": "周杰伦" },
     { "id": "6ce7ea8ada884bf3889fa7c7fb206691", "name": "御女茉莉" }
 ]
-SPEEKERS = {
-    "fishaudio":FISHAUDIO_SPEEKER,
-    "azure":[
-        {"id":"zh-CN-YunxiNeural","name":"云希"},
-        {"id":"zh-CN-YunzeNeural","name":"云哲"},
-        {"id":"zh-CN-YunxuanNeural","name":"晓萱"},
-    ]
-}
