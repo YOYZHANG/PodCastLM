@@ -16,3 +16,4 @@ python-multipart==0.0.12
 PyPDF2==3.0.1
 azure-cognitiveservices-speech==1.41.1
 fish_audio_sdk
+requests
