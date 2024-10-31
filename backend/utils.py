@@ -18,6 +18,7 @@ from PyPDF2 import PdfReader
 from schema import PodcastInfo, ShortDialogue, Summary
 from constants import (
     AUDIO_CACHE_DIR,
+    ENABLE_MODEL_JSON_SCHEMA,
     FIREWORKS_API_KEY,
     FIREWORKS_BASE_URL,
     FIREWORKS_MODEL_ID,
@@ -214,9 +215,11 @@ def call_llm_stream(system_prompt: str, text: str, dialogue_format: Any, isJSON:
     # 如果需要 JSON 响应，添加 response_format 参数
     if isJSON:
         request_params["response_format"] = {
-            "type": "json_object",
-            "schema": dialogue_format.model_json_schema(),
+            "type": "json_object"
         }
+        if ENABLE_MODEL_JSON_SCHEMA:
+            request_params["response_format"]['schema'] = dialogue_format.model_json_schema()
+
     stream = fw_client.chat.completions.create(**request_params)
 
     full_response = ""

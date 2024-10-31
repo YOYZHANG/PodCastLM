@@ -34,6 +34,9 @@ FIREWORKS_MAX_TOKENS = int(os.getenv('FIREWORKS_MAX_TOKENS',"16384"))
 FIREWORKS_MODEL_ID = os.getenv('FIREWORKS_MODEL_ID',"accounts/fireworks/models/llama-v3p1-405b-instruct")
 FIREWORKS_TEMPERATURE = 0.1
 FIREWORKS_JSON_RETRY_ATTEMPTS = 3
+ENABLE_MODEL_JSON_SCHEMA=os.getenv('ENABLE_MODEL_JSON_SCHEMA',"true")=="true"
+
+
 # Suno related constants
 SUNO_LANGUAGE_MAPPING = {
     "English": "en",
