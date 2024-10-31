@@ -30,7 +30,7 @@ JINA_KEY = os.getenv('JINA_KEY')
 # Fireworks API-related constants
 FIREWORKS_API_KEY = os.getenv('FIREWORKS_API_KEY')
 FIREWORKS_BASE_URL = os.getenv('FIREWORKS_BASE_URL',"https://api.fireworks.ai/inference/v1")
-FIREWORKS_MAX_TOKENS = 16_384
+FIREWORKS_MAX_TOKENS = int(os.getenv('FIREWORKS_MAX_TOKENS',"16384"))
 FIREWORKS_MODEL_ID = os.getenv('FIREWORKS_MODEL_ID',"accounts/fireworks/models/llama-v3p1-405b-instruct")
 FIREWORKS_TEMPERATURE = 0.1
 FIREWORKS_JSON_RETRY_ATTEMPTS = 3
