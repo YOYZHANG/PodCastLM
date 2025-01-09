@@ -13,7 +13,7 @@ from fishaudio import fishaudio_tts
 from prompts import LANGUAGE_MODIFIER, LENGTH_MODIFIERS, PODCAST_INFO_PROMPT, QUESTION_MODIFIER, SUMMARY_INFO_PROMPT, SYSTEM_PROMPT, TONE_MODIFIER
 import json
 from pydub import AudioSegment
-from fastapi import UploadFile
+from fastapi import HTTPException, UploadFile
 from PyPDF2 import PdfReader
 from schema import PodcastInfo, ShortDialogue, Summary
 from constants import (
@@ -259,15 +259,18 @@ def get_link_text(url: str):
     """ 通过jina.ai 抓取url内容 """
     url  = f"https://r.jina.ai/{url}"
     headers = {}
-    headers['Authorization'] = 'Bearer ' + JINA_KEY
+    if JINA_KEY:
+        headers['Authorization'] = 'Bearer ' + JINA_KEY
     headers['Accept'] = 'application/json'
     headers['X-Return-Format'] = 'text'
     response = requests.get(url, headers=headers)
-    return response.json()['data']
+    result = response.json()
+    if 'code' in result and result['code'] == 200:
+        return result['data']   
+    raise HTTPException(status_code=405, detail=f"Link抓取错误：{result['message']}")    
 
 async def get_pdf_text(pdf_file: UploadFile):
     text = ""
-    print(pdf_file)
     try:
        # 读取上传文件的内容
         contents = await pdf_file.read()

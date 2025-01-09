@@ -9,6 +9,15 @@
 
 在线地址: ⚡️ [PodCastLM](https://endearing-rabanadas-2ee528.netlify.app.)
 
+Try it With Dockr:
+
+```bash
+curl -L https://raw.githubusercontent.com/YOYZHANG/PodCastLM/main/docker-compose.yml > docker-compose.yml
+curl -L https://raw.githubusercontent.com/YOYZHANG/PodCastLM/main/.env.template > .env
+# modify .env file with your own configuration
+docker-compose up -d
+```
+
 ## OverView
 该项目的灵感来自于 Google NotebookLM 工具。通过处理 PDF 的内容，生成适合音频播客的自然对话，并将其输出为 MP3 文件。
 

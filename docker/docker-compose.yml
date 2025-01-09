@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  podcastlm-server:
+    image: liuhuapiaoyuan/podcastlm-server
+    ports:
+      - "7861:7860"   
+    env_file:
+      - .env
+
+  podcastlm-frontend:
+    image: liuhuapiaoyuan/podcastlm-frontend
+    ports:
+      - "82:80" 
+    environment:
+      - BACKEND_API=http://podcastlm-server:7860/
