@@ -30,12 +30,6 @@
 
 ## 👤作者
 
-如果有任何疑问或技术上的交流，可以在 Twitter 或微信上联系我。
-
-**YOYZHANG**
-
-- twitter: [@alexu19049062](https://twitter.com/alexuzhang19049062)
-- 微信: whdxzxq
 
 ## 🤝 贡献
 欢迎贡献 [issues](https://github.com/YOYZHANG/ai-ppt/issues).
